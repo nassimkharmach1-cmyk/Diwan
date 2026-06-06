@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ديوان — منصة الشعر العربي</title>
+
+<!-- SEO -->
+<meta name="description" content="ديوان — منصة الشعر العربي الأولى. شارك قصائدك، تفاعل مع الشعراء، واكتشف أجمل الأشعار العربية.">
+<meta name="keywords" content="ديوان, شعر عربي, قصائد, شعر, شعراء, منصة شعر, شعر عربي اونلاين">
+<meta name="author" content="ديوان">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Arabic">
+
+<!-- Open Graph للمشاركة على السوشيال ميديا -->
+<meta property="og:title" content="ديوان — منصة الشعر العربي">
+<meta property="og:description" content="شارك قصائدك وتفاعل مع الشعراء من كل مكان">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ديوان — منصة الشعر العربي">
+<meta name="twitter:description" content="شارك قصائدك وتفاعل مع الشعراء من كل مكان">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://nassimkharmach1-cmyk.github.io/Diwan">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --gold:#c9a84c; --gold-light:#e8c97a; --gold-dim:#8a6f30; --dark:#0d0b07; --dark3:#1c1608; --dark4:#241d0a; --cream:#f5ead8; --cream-dim:#c8b896; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--cream); font-family:'Amiri',serif; min-height:100vh; overflow-x:hidden; transition:background 0.3s,color 0.3s; }
+  body.light-mode { --dark:#f5f0e8; --dark3:#ede4d0; --dark4:#e0d4b8; --cream:#1a1206; --cream-dim:#3d2e0f; }
+  body.light-mode nav { background:rgba(245,240,232,0.95); }
+  @keyframes heartFly { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-100px) scale(2)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+  body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse at 20% 20%,rgba(201,168,76,0.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(201,168,76,0.04) 0%,transparent 60%); pointer-events:none; z-index:0; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(13,11,7,0.95); backdrop-filter:blur(12px); border-bottom:1px solid rgba(201,168,76,0.2); padding:0 1.5rem; display:flex; align-items:center; justify-content:space-between; height:64px; }
+  .logo { font-family:'Scheherazade New',serif; font-size:1.7rem; color:var(--gold); cursor:pointer; }
+  .logo span { color:var(--cream-dim); font-size:0.8rem; display:block; line-height:0.8; }
+  .nav-links { display:flex; gap:0.8rem; align-items:center; }
+  .btn-gold { background:linear-gradient(135deg,var(--gold-dim),var(--gold)); color:#0d0b07; border:none; padding:0.45rem 1rem; border-radius:2px; font-family:'Amiri',serif; font-size:0.95rem; cursor:pointer; font-weight:700; }
+  .btn-outline { background:none; border:1px solid var(--gold-dim); color:var(--gold-dim); padding:0.45rem 1rem; border-radius:2px; font-family:'Amiri',serif; font-size:0.95rem; cursor:pointer; }
+  .btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+  .nav-user { display:flex; align-items:center; gap:0.8rem; cursor:pointer; }
+  .nav-avatar { width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); background:linear-gradient(135deg,var(--dark4),var(--gold-dim)); display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--gold-light); overflow:hidden; }
+  .nav-username { color:var(--gold-light); font-size:0.95rem; }
+  .theme-btn { background:none; border:none; font-size:1.2rem; cursor:pointer; }
+  .stats-bar { background:rgba(201,168,76,0.05); border-bottom:1px solid rgba(201,168,76,0.1); padding:0.5rem 1.5rem; display:flex; justify-content:center; gap:2rem; font-size:0.85rem; color:var(--cream-dim); }
+  .stats-bar span { color:var(--gold); font-weight:700; }
+  .hero { text-align:center; padding:3rem 2rem 2rem; border-bottom:1px solid rgba(201,168,76,0.12); position:relative; z-index:1; }
+  .hero h1 { font-family:'Scheherazade New',serif; font-size:clamp(2rem,6vw,3.5rem); color:var(--gold-light); margin-bottom:0.6rem; }
+  .hero p { font-size:1rem; color:var(--cream-dim); max-width:480px; margin:0 auto 1rem; line-height:1.8; }
+  .search-bar { display:flex; gap:0.5rem; max-width:400px; margin:0 auto; }
+  .search-bar input { flex:1; background:rgba(13,11,7,0.6); border:1px solid rgba(201,168,76,0.2); border-radius:20px; color:var(--cream); font-family:'Amiri',serif; font-size:0.95rem; padding:0.5rem 1rem; outline:none; text-align:right; }
+  .search-bar button { background:var(--gold-dim); border:none; color:#0d0b07; padding:0.5rem 1rem; border-radius:20px; cursor:pointer; font-family:'Amiri',serif; font-size:0.9rem; font-weight:700; }
+  .mood-filter { display:flex; gap:0.4rem; justify-content:center; flex-wrap:wrap; margin:1rem 0 0; }
+  .mood-btn { background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.2); color:var(--cream-dim); padding:0.3rem 0.8rem; border-radius:20px; font-family:'Amiri',serif; font-size:0.85rem; cursor:pointer; transition:all 0.2s; }
+  .mood-btn:hover,.mood-btn.active { background:var(--gold-dim); color:#0d0b07; }
+  .container { position:relative; z-index:1; max-width:700px; margin:0 auto; padding:1.5rem 1rem; }
+  .post-box { background:linear-gradient(135deg,var(--dark3),var(--dark4)); border:1px solid rgba(201,168,76,0.2); border-radius:4px; padding:1.5rem; margin-bottom:1.5rem; }
+  .post-box h3 { color:var(--gold); font-size:1rem; margin-bottom:1rem; }
+  .post-box .locked-msg { text-align:center; color:var(--cream-dim); padding:1rem 0; font-size:0.95rem; }
+  .post-box .locked-msg a { color:var(--gold); cursor:pointer; }
+  .post-box input,.post-box textarea,.post-box select { width:100%; background:rgba(13,11,7,0.6); border:1px solid rgba(201,168,76,0.15); border-radius:3px; color:var(--cream); font-family:'Amiri',serif; font-size:1rem; padding:0.6rem 0.9rem; margin-bottom:0.7rem; outline:none; text-align:right; resize:vertical; }
+  .post-box textarea { min-height:110px; line-height:1.9; }
+  .post-box select option { background:#1c1608; }
+  .char-counter { text-align:left; font-size:0.8rem; color:var(--cream-dim); opacity:0.6; margin-top:-0.5rem; margin-bottom:0.5rem; }
+  .feed { display:flex; flex-direction:column; gap:1.2rem; }
+  .poem-card { background:linear-gradient(160deg,var(--dark3),var(--dark4)); border:1px solid rgba(201,168,76,0.15); border-radius:4px; padding:1.5rem; animation:fadeUp 0.5s ease both; transition:border-color 0.3s; }
+  .poem-card:hover { border-color:rgba(201,168,76,0.35); }
+  .card-header { display:flex; align-items:center; gap:0.8rem; margin-bottom:1rem; }
+  .avatar { width:40px; height:40px; border-radius:50%; border:1px solid var(--gold-dim); background:linear-gradient(135deg,var(--dark4),var(--gold-dim)); display:flex; align-items:center; justify-content:center; font-size:1rem; color:var(--gold-light); flex-shrink:0; overflow:hidden; cursor:pointer; }
+  .avatar img { width:100%; height:100%; object-fit:cover; }
+  .card-meta { flex:1; }
+  .card-meta .name { color:var(--gold-light); font-size:0.95rem; font-weight:700; cursor:pointer; }
+  .card-meta .name:hover { color:var(--gold); }
+  .card-meta .time { color:var(--cream-dim); font-size:0.8rem; opacity:0.6; }
+  .poem-title { font-family:'Scheherazade New',serif; font-size:1.35rem; color:var(--gold); margin-bottom:0.7rem; }
+  .poem-text { font-size:1.05rem; line-height:2.1; color:var(--cream); white-space:pre-line; border-right:2px solid rgba(201,168,76,0.25); padding-right:1rem; margin-bottom:1rem; }
+  .poem-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin-bottom:1rem; }
+  .tag { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); color:var(--gold-dim); padding:0.15rem 0.6rem; border-radius:20px; font-size:0.8rem; }
+  .card-actions { display:flex; gap:0.8rem; border-top:1px solid rgba(201,168,76,0.1); padding-top:0.8rem; flex-wrap:wrap; }
+  .action-btn { background:none; border:1px solid rgba(201,168,76,0.15); color:var(--cream-dim); font-family:'Amiri',serif; font-size:0.9rem; cursor:pointer; display:flex; align-items:center; gap:0.3rem; padding:0.4rem 0.8rem; border-radius:20px; transition:all 0.2s; }
+  .action-btn:hover { color:var(--gold); border-color:var(--gold-dim); background:rgba(201,168,76,0.08); }
+  .action-btn.liked { color:var(--gold); border-color:var(--gold); background:rgba(201,168,76,0.1); }
+  .action-btn.danger:hover { color:#e74c3c; border-color:#e74c3c; }
+  .comments-section { margin-top:1rem; display:none; border-top:1px solid rgba(201,168,76,0.1); padding-top:0.8rem; }
+  .comments-section.open { display:block; }
+  .comment { display:flex; gap:0.6rem; margin-bottom:0.7rem; padding:0.5rem; background:rgba(13,11,7,0.4); border-radius:3px; }
+  .comment .sm-avatar { width:30px; height:30px; border-radius:50%; border:1px solid var(--gold-dim); background:linear-gradient(135deg,var(--dark4),var(--gold-dim)); display:flex; align-items:center; justify-content:center; font-size:0.8rem; color:var(--gold-light); flex-shrink:0; overflow:hidden; }
+  .comment .sm-avatar img { width:100%; height:100%; object-fit:cover; }
+  .comment-body { flex:1; }
+  .comment-body .cname { color:var(--gold-dim); font-size:0.82rem; font-weight:700; }
+  .comment-body .ctext { color:var(--cream-dim); font-size:0.92rem; line-height:1.7; }
+  .comment-input-row { display:flex; gap:0.5rem; margin-top:0.8rem; }
+  .comment-input-row input { flex:1; background:rgba(13,11,7,0.6); border:1px solid rgba(201,168,76,0.2); border-radius:20px; color:var(--cream); font-family:'Amiri',serif; font-size:0.9rem; padding:0.5rem 0.9rem; outline:none; text-align:right; }
+  .comment-input-row input:focus { border-color:var(--gold-dim); }
+  .comment-input-row button { background:var(--gold-dim); border:none; color:#0d0b07; padding:0.5rem 1rem; border-radius:20px; cursor:pointer; font-family:'Amiri',serif; font-size:0.9rem; font-weight:700; white-space:nowrap; }
+  .comment-input-row button:hover { background:var(--gold); }
+  /* PROFILE */
+  .profile-page { max-width:700px; margin:0 auto; padding:1.5rem 1rem; }
+  .back-btn { background:none; border:none; color:var(--cream-dim); font-family:'Amiri',serif; font-size:1rem; cursor:pointer; margin-bottom:1rem; display:flex; align-items:center; gap:0.3rem; }
+  .back-btn:hover { color:var(--gold); }
+  .profile-header { background:linear-gradient(135deg,var(--dark3),var(--dark4)); border:1px solid rgba(201,168,76,0.2); border-radius:4px; padding:2rem; text-align:center; margin-bottom:1.5rem; }
+  .profile-avatar-wrap { width:90px; height:90px; margin:0 auto 1rem; border-radius:50%; overflow:hidden; border:3px solid var(--gold); display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--dark4),var(--gold-dim)); font-size:2rem; color:var(--gold-light); }
+  .profile-avatar-wrap img { width:100%; height:100%; object-fit:cover; }
+  .profile-name { font-family:'Scheherazade New',serif; font-size:1.8rem; color:var(--gold-light); margin-bottom:0.4rem; display:flex; align-items:center; justify-content:center; gap:0.5rem; flex-wrap:wrap; }
+  .dev-badge { background:linear-gradient(135deg,#8a6f30,#c9a84c); color:#0d0b07; padding:0.2rem 0.8rem; border-radius:20px; font-size:0.85rem; font-family:'Amiri',serif; font-weight:700; }
+  .profile-bio { color:var(--cream-dim); font-size:0.95rem; margin-bottom:1rem; line-height:1.7; }
+  .profile-badges { display:flex; flex-wrap:wrap; gap:0.4rem; justify-content:center; margin-bottom:1rem; }
+  .badge { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3); color:var(--gold-dim); padding:0.2rem 0.7rem; border-radius:20px; font-size:0.82rem; }
+  .profile-stats { display:flex; justify-content:center; gap:2.5rem; margin-bottom:1rem; }
+  .stat { text-align:center; }
+  .stat .num { font-size:1.5rem; color:var(--gold); font-weight:700; }
+  .stat .lbl { font-size:0.82rem; color:var(--cream-dim); }
+  /* MODAL */
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:200; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+  .modal-overlay.open { display:flex; }
+  .modal { background:var(--dark3); border:1px solid rgba(201,168,76,0.3); border-radius:6px; padding:2rem; width:90%; max-width:420px; position:relative; animation:modalIn 0.3s ease; max-height:90vh; overflow-y:auto; }
+  @keyframes modalIn { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+  .modal h2 { font-family:'Scheherazade New',serif; color:var(--gold); font-size:1.7rem; text-align:center; margin-bottom:1.3rem; }
+  .modal input,.modal textarea { width:100%; background:rgba(13,11,7,0.8); border:1px solid rgba(201,168,76,0.2); border-radius:3px; color:var(--cream); font-family:'Amiri',serif; font-size:1rem; padding:0.65rem 0.9rem; margin-bottom:0.8rem; outline:none; text-align:right; }
+  .modal input:focus,.modal textarea:focus { border-color:var(--gold-dim); }
+  .modal textarea { min-height:80px; resize:vertical; line-height:1.8; }
+  .modal-close { position:absolute; top:1rem; left:1rem; background:none; border:none; color:var(--cream-dim); font-size:1.2rem; cursor:pointer; }
+  .modal-close:hover { color:var(--gold); }
+  .modal-tabs { display:flex; margin-bottom:1.3rem; border:1px solid rgba(201,168,76,0.2); border-radius:3px; overflow:hidden; }
+  .modal-tab { flex:1; padding:0.6rem; text-align:center; cursor:pointer; background:none; border:none; font-family:'Amiri',serif; font-size:1rem; color:var(--cream-dim); }
+  .modal-tab.active { background:var(--gold-dim); color:#0d0b07; font-weight:700; }
+  .error-msg { color:#e74c3c; font-size:0.9rem; text-align:center; margin-bottom:0.5rem; display:none; }
+  .error-msg.show { display:block; }
+  .notif { position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(80px); background:linear-gradient(135deg,var(--dark4),var(--dark3)); border:1px solid var(--gold-dim); color:var(--gold-light); padding:0.7rem 1.5rem; border-radius:3px; font-size:0.95rem; z-index:300; transition:transform 0.4s ease; white-space:nowrap; max-width:90vw; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,0.5); }
+  .notif.show { transform:translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="showMain()">ديوان <span>منصة الشعر العربي</span></div>
+  <div class="nav-links">
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    <div id="nav-auth" style="display:flex;gap:0.5rem">
+      <button class="btn-outline" onclick="openModal('login')">دخول</button>
+      <button class="btn-gold" onclick="openModal('register')">تسجيل</button>
+    </div>
+    <div id="nav-user" style="display:none;align-items:center;gap:0.8rem">
+      <div class="nav-user" onclick="showMyProfile()">
+        <div class="nav-avatar" id="nav-avatar-wrap">؟</div>
+        <span class="nav-username" id="nav-username-display"></span>
+      </div>
+      <button class="btn-outline" onclick="logout()" style="font-size:0.85rem">خروج</button>
+    </div>
+  </div>
+</nav>
+
+<div class="stats-bar">
+  <div>📜 <span id="total-poems">0</span> قصيدة</div>
+  <div>❤️ <span id="total-likes">0</span> إعجاب</div>
+  <div>👁️ <span id="visitor-count">0</span> زيارة</div>
+</div>
+
+<div id="hero-section">
+  <div class="hero">
+    <h1>أهلاً بك في ديوان</h1>
+    <p>مساحة للشعر العربي الأصيل — شارك قصائدك وتفاعل مع الشعراء من كل مكان</p>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="ابحث عن قصيدة أو شاعر..." onkeyup="if(event.key==='Enter')searchPoems()">
+      <button onclick="searchPoems()">بحث</button>
+    </div>
+    <div class="mood-filter">
+      <button class="mood-btn active" onclick="filterMood('all',this)">الكل</button>
+      <button class="mood-btn" onclick="filterMood('حب',this)">❤️ حب</button>
+      <button class="mood-btn" onclick="filterMood('حنين',this)">🌙 حنين</button>
+      <button class="mood-btn" onclick="filterMood('حزن',this)">😢 حزن</button>
+      <button class="mood-btn" onclick="filterMood('فرح',this)">😊 فرح</button>
+      <button class="mood-btn" onclick="filterMood('هدوء',this)">🕊️ هدوء</button>
+    </div>
+  </div>
+</div>
+
+<div id="main-feed-section">
+  <div class="container">
+    <div class="post-box">
+      <h3>✍️ أضف قصيدتك</h3>
+      <div id="post-locked" class="locked-msg">سجّل دخولك لنشر قصيدتك — <a onclick="openModal('login')">دخول</a> أو <a onclick="openModal('register')">تسجيل</a></div>
+      <div id="post-form" style="display:none">
+        <input id="poem-title-input" type="text" placeholder="عنوان القصيدة...">
+        <textarea id="poem-text-input" placeholder="اكتب قصيدتك هنا..." oninput="document.getElementById('char-count').textContent=this.value.length+' حرف'"></textarea>
+        <div class="char-counter" id="char-count">0 حرف</div>
+        <select id="poem-mood">
+          <option value="">— اختر مزاج القصيدة —</option>
+          <option value="حب">❤️ حب</option>
+          <option value="حنين">🌙 حنين</option>
+          <option value="حزن">😢 حزن</option>
+          <option value="فرح">😊 فرح</option>
+          <option value="غضب">🔥 غضب</option>
+          <option value="هدوء">🕊️ هدوء</option>
+        </select>
+        <input id="poem-tags-input" type="text" placeholder="الوسوم: #غزل #حنين ...">
+        <button class="btn-gold" onclick="postPoem()" style="width:100%;padding:0.7rem;">نشر القصيدة ✦</button>
+      </div>
+    </div>
+    <div class="feed" id="feed">
+      <div style="text-align:center;color:var(--cream-dim);padding:3rem">جارٍ التحميل... 🌙</div>
+    </div>
+  </div>
+</div>
+
+<div id="profile-section" style="display:none"></div>
+
+<!-- مودال دخول/تسجيل -->
+<div class="modal-overlay" id="auth-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('auth-modal')">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-login" onclick="switchTab('login')">دخول</button>
+      <button class="modal-tab" id="tab-register" onclick="switchTab('register')">تسجيل</button>
+    </div>
+    <div id="login-form">
+      <h2>مرحباً بعودتك</h2>
+      <div class="error-msg" id="login-error"></div>
+      <input type="email" id="login-email" placeholder="البريد الإلكتروني">
+      <input type="password" id="login-password" placeholder="كلمة المرور">
+      <button class="btn-gold" onclick="doLogin()" style="width:100%;padding:0.75rem;">دخول ✦</button>
+    </div>
+    <div id="register-form" style="display:none">
+      <h2>انضم إلى ديوان</h2>
+      <div class="error-msg" id="register-error"></div>
+      <input type="text" id="reg-name" placeholder="الاسم الكامل">
+      <input type="email" id="reg-email" placeholder="البريد الإلكتروني">
+      <input type="password" id="reg-password" placeholder="كلمة المرور (6 أحرف على الأقل)">
+      <button class="btn-gold" onclick="doRegister()" style="width:100%;padding:0.75rem;">إنشاء الحساب ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- مودال تعديل القصيدة -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('edit-modal')">✕</button>
+    <h2>تعديل القصيدة ✏️</h2>
+    <input type="hidden" id="edit-id">
+    <input type="text" id="edit-title" placeholder="عنوان القصيدة...">
+    <textarea id="edit-text" placeholder="نص القصيدة..." style="min-height:150px"></textarea>
+    <button class="btn-gold" onclick="saveEdit()" style="width:100%;padding:0.7rem;">حفظ التعديل ✦</button>
+    <p style="text-align:center;color:var(--cream-dim);font-size:0.8rem;margin-top:0.5rem">⏱️ التعديل متاح 10 دقائق فقط بعد النشر</p>
+  </div>
+</div>
+
+<!-- مودال تعديل الملف الشخصي -->
+<div class="modal-overlay" id="edit-profile-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('edit-profile-modal')">✕</button>
+    <h2>تعديل ملفك ✏️</h2>
+    <input type="text" id="edit-profile-name" placeholder="الاسم الكامل">
+    <textarea id="edit-bio" placeholder="نبذة عنك..."></textarea>
+    <button class="btn-gold" id="save-profile-btn" onclick="saveProfile()" style="width:100%;padding:0.7rem;">حفظ ✦</button>
+  </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, arrayUnion, arrayRemove, deleteDoc, orderBy, query, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const DEVELOPER_EMAIL = 'nassimkharmach1@gmail.com';
+  const firebaseConfig = {
+    apiKey: "AIzaSyDJ5INkQE5fiiFRE90p_IJnH_tEmOzfXKU",
+    authDomain: "diwan-515a8.firebaseapp.com",
+    projectId: "diwan-515a8",
+    storageBucket: "diwan-515a8.firebasestorage.app",
+    messagingSenderId: "623809130347",
+    appId: "1:623809130347:web:3f41e14f569c87b7a8662e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  let currentUser = null;
+  let allPoems = [];
+  let currentView = 'feed';
+  let viewingUID = null;
+
+  function avatarUrl(name) {
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=8a6f30&color=f5ead8&size=80&bold=true&font-size=0.4`;
+  }
+
+  // ===== AUTH =====
+  onAuthStateChanged(auth, async user => {
+    currentUser = user;
+    updateNavUI();
+    updatePostBox();
+    if (user) checkBadges(user.uid);
+  });
+
+  window.doRegister = async function() {
+    const name = document.getElementById('reg-name').value.trim();
+    const email = document.getElementById('reg-email').value.trim();
+    const pass = document.getElementById('reg-password').value;
+    if (!name || !email || !pass) { showError('register-error','يرجى ملء جميع الحقول'); return; }
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, pass);
+      await updateProfile(cred.user, { displayName: name });
+      const isDev = email === DEVELOPER_EMAIL;
+      await setDoc(doc(db,'users', cred.user.uid), {
+        name, email,
+        bio: isDev ? '👑 مؤسس ومطور ديوان' : 'شاعر جديد في ديوان',
+        joinedAt: new Date(),
+        poemsCount: 0,
+        badges: isDev ? ['👑 المطور', '🌟 مؤسس'] : ['🌱 شاعر جديد'],
+        isDeveloper: isDev
+      });
+      closeModal('auth-modal');
+      showNotif(`أهلاً بك يا ${name} ✦`);
+      if (isDev) setTimeout(() => showNotif('👑 مرحباً أيها المطور!'), 2000);
+    } catch(e) {
+      showError('register-error', e.code === 'auth/email-already-in-use' ? 'البريد مستخدم من قبل' : e.message);
+    }
+  }
+
+  window.doLogin = async function() {
+    const email = document.getElementById('login-email').value.trim();
+    const pass = document.getElementById('login-password').value;
+    if (!email || !pass) { showError('login-error','يرجى ملء جميع الحقول'); return; }
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, pass);
+      if (email === DEVELOPER_EMAIL) {
+        try { await updateDoc(doc(db,'users',cred.user.uid), { isDeveloper: true }); } catch(e){}
+      }
+      closeModal('auth-modal');
+      showNotif('مرحباً بعودتك ✦');
+    } catch(e) {
+      showError('login-error','البريد أو كلمة المرور غير صحيحة');
+    }
+  }
+
+  window.logout = async function() {
+    await signOut(auth);
+    showMain();
+    showNotif('تم تسجيل الخروج 🌙');
+  }
+
+  // ===== PROFILE =====
+  window.showProfile = async function(uid) {
+    if (!uid) return;
+    currentView = 'profile';
+    viewingUID = uid;
+    document.getElementById('main-feed-section').style.display = 'none';
+    document.getElementById('profile-section').style.display = 'block';
+    document.getElementById('hero-section').style.display = 'none';
+    document.getElementById('profile-section').innerHTML = `<div class="profile-page"><div style="text-align:center;padding:3rem;color:var(--cream-dim)">جارٍ التحميل... 🌙</div></div>`;
+
+    const userDoc = await getDoc(doc(db,'users',uid));
+    const u = userDoc.exists() ? userDoc.data() : { name:'مجهول', bio:'', badges:[], isDeveloper:false };
+    const isDev = u.isDeveloper || u.email === DEVELOPER_EMAIL;
+    const userPoems = allPoems.filter(p => p.authorId === uid);
+    const isMe = currentUser && currentUser.uid === uid;
+    const totalLikes = userPoems.reduce((s,p) => s+(p.likes?.length||0), 0);
+
+    document.getElementById('profile-section').innerHTML = `
+      <div class="profile-page">
+        <button class="back-btn" onclick="showMain()">← رجوع للرئيسية</button>
+        <div class="profile-header">
+          <div class="profile-avatar-wrap">
+            <img src="${avatarUrl(u.name||'؟')}" alt="${u.name}">
+          </div>
+          <div class="profile-name">
+            ${u.name || 'مجهول'}
+            ${isDev ? '<span class="dev-badge">👑 المطور</span>' : ''}
+          </div>
+          <div class="profile-bio">${u.bio || 'لا توجد نبذة بعد'}</div>
+          <div class="profile-badges">${(u.badges||[]).map(b=>`<span class="badge">${b}</span>`).join('')}</div>
+          <div class="profile-stats">
+            <div class="stat"><div class="num">${userPoems.length}</div><div class="lbl">قصيدة</div></div>
+            <div class="stat"><div class="num">${totalLikes}</div><div class="lbl">إعجاب</div></div>
+          </div>
+          ${isMe ? `<button class="btn-outline" style="margin-top:1rem" onclick="openEditProfile()">تعديل الملف ✏️</button>` : ''}
+        </div>
+        <div class="feed">
+          ${userPoems.length === 0
+            ? `<div style="text-align:center;color:var(--cream-dim);padding:2rem">لا توجد قصائد بعد 🌙</div>`
+            : userPoems.map((p,i) => renderCard(p,i)).join('')}
+        </div>
+      </div>`;
+  }
+
+  window.showMain = function() {
+    currentView = 'feed';
+    viewingUID = null;
+    document.getElementById('main-feed-section').style.display = 'block';
+    document.getElementById('profile-section').style.display = 'none';
+    document.getElementById('hero-section').style.display = 'block';
+    renderFeed(allPoems);
+  }
+
+  window.showMyProfile = function() {
+    if (currentUser) showProfile(currentUser.uid);
+    else openModal('login');
+  }
+
+  window.openEditProfile = function() {
+    if (!currentUser) return;
+    getDoc(doc(db,'users',currentUser.uid)).then(d => {
+      const u = d.exists() ? d.data() : {};
+      document.getElementById('edit-profile-name').value = u.name || currentUser.displayName || '';
+      document.getElementById('edit-bio').value = u.bio || '';
+      openModal('edit-profile-modal');
+    });
+  }
+
+  window.saveProfile = async function() {
+    if (!currentUser) return;
+    const name = document.getElementById('edit-profile-name').value.trim();
+    const bio = document.getElementById('edit-bio').value.trim();
+    if (!name) { showNotif('يرجى كتابة الاسم'); return; }
+    const btn = document.getElementById('save-profile-btn');
+    btn.textContent = 'جارٍ الحفظ...';
+    btn.disabled = true;
+    try {
+      await updateDoc(doc(db,'users',currentUser.uid), { name, bio });
+      await updateProfile(currentUser, { displayName: name });
+      closeModal('edit-profile-modal');
+      showNotif('تم تحديث ملفك ✦');
+      if (currentView === 'profile') showProfile(currentUser.uid);
+      updateNavUI();
+    } catch(e) {
+      showNotif('خطأ في الحفظ — حاول مرة أخرى');
+    }
+    btn.textContent = 'حفظ ✦';
+    btn.disabled = false;
+  }
+
+  // ===== POEMS =====
+  window.postPoem = async function() {
+    if (!currentUser) { openModal('login'); return; }
+    const title = document.getElementById('poem-title-input').value.trim();
+    const text = document.getElementById('poem-text-input').value.trim();
+    const tagsRaw = document.getElementById('poem-tags-input').value.trim();
+    const mood = document.getElementById('poem-mood').value;
+    if (!title || !text) { showNotif('يرجى كتابة عنوان ونص القصيدة'); return; }
+    const tags = tagsRaw ? tagsRaw.split(/\s+/).filter(t=>t.startsWith('#')) : ['#جديد'];
+    await addDoc(collection(db,'poems'), {
+      title, text, tags, mood,
+      authorId: currentUser.uid,
+      authorName: currentUser.displayName || 'مجهول',
+      likes: [], comments: [],
+      createdAt: new Date(), editedAt: null
+    });
+    try { await updateDoc(doc(db,'users',currentUser.uid), { poemsCount: increment(1) }); } catch(e){}
+    document.getElementById('poem-title-input').value = '';
+    document.getElementById('poem-text-input').value = '';
+    document.getElementById('poem-tags-input').value = '';
+    document.getElementById('poem-mood').value = '';
+    document.getElementById('char-count').textContent = '0 حرف';
+    showNotif('نُشرت قصيدتك بنجاح ✦');
+    checkBadges(currentUser.uid);
+  }
+
+  window.toggleLike = async function(id) {
+    if (!currentUser) { openModal('login'); showNotif('سجّل دخولك للإعجاب ✦'); return; }
+    const poem = allPoems.find(p => p.id === id);
+    if (!poem) return;
+    const ref = doc(db,'poems',id);
+    if (poem.likes?.includes(currentUser.uid)) {
+      await updateDoc(ref, { likes: arrayRemove(currentUser.uid) });
+    } else {
+      await updateDoc(ref, { likes: arrayUnion(currentUser.uid) });
+      showHeartEffect();
+    }
+  }
+
+  window.submitComment = async function(id) {
+    if (!currentUser) { openModal('login'); showNotif('سجّل دخولك للتعليق ✦'); return; }
+    const input = document.getElementById('ci-' + id);
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) { showNotif('اكتب تعليقاً أولاً'); return; }
+    try {
+      await updateDoc(doc(db,'poems',id), {
+        comments: arrayUnion({
+          uid: currentUser.uid,
+          name: currentUser.displayName || 'مجهول',
+          text: text,
+          time: new Date().toISOString()
+        })
+      });
+      input.value = '';
+      showNotif('تم نشر تعليقك ✦');
+    } catch(e) {
+      showNotif('خطأ في نشر التعليق');
+    }
+  }
+
+  window.deletePoem = async function(id) {
+    if (!confirm('هل أنت متأكد من حذف القصيدة؟')) return;
+    await deleteDoc(doc(db,'poems',id));
+    showNotif('تم حذف القصيدة');
+  }
+
+  window.editPoem = async function(id) {
+    const poem = allPoems.find(p => p.id === id);
+    if (!poem) return;
+    const created = poem.createdAt?.toDate ? poem.createdAt.toDate() : new Date(poem.createdAt);
+    const diff = (Date.now() - created.getTime()) / 1000 / 60;
+    if (diff > 10) { showNotif('انتهى وقت التعديل — 10 دقائق فقط ⏱️'); return; }
+    document.getElementById('edit-id').value = id;
+    document.getElementById('edit-title').value = poem.title;
+    document.getElementById('edit-text').value = poem.text;
+    openModal('edit-modal');
+  }
+
+  window.saveEdit = async function() {
+    const id = document.getElementById('edit-id').value;
+    const title = document.getElementById('edit-title').value.trim();
+    const text = document.getElementById('edit-text').value.trim();
+    if (!title || !text) return;
+    await updateDoc(doc(db,'poems',id), { title, text, editedAt: new Date() });
+    closeModal('edit-modal');
+    showNotif('تم تعديل القصيدة ✦');
+  }
+
+  window.sharePoem = async function(id) {
+    const poem = allPoems.find(p => p.id === id);
+    if (!poem) return;
+    const shareText = `${poem.title}\n\n${poem.text}\n\n— من ديوان منصة الشعر العربي\nmagnificent-chaja-0b9786.netlify.app`;
+    if (navigator.share) { await navigator.share({ title: poem.title, text: shareText }); }
+    else { navigator.clipboard.writeText(shareText); showNotif('تم نسخ القصيدة ✦'); }
+  }
+
+  window.toggleComments = function(id) {
+    const el = document.getElementById('comments-' + id);
+    if (el) el.classList.toggle('open');
+  }
+
+  async function checkBadges(uid) {
+    try {
+      const d = await getDoc(doc(db,'users',uid));
+      if (!d.exists()) return;
+      const data = d.data();
+      const badges = data.badges || [];
+      const count = data.poemsCount || 0;
+      let nb = [...badges];
+      if (count >= 1 && !nb.includes('✍️ شاعر')) nb.push('✍️ شاعر');
+      if (count >= 5 && !nb.includes('🏆 شاعر محترف')) nb.push('🏆 شاعر محترف');
+      if (count >= 10 && !nb.includes('👑 سيد الشعراء')) nb.push('👑 سيد الشعراء');
+      if (nb.length !== badges.length) {
+        await updateDoc(doc(db,'users',uid), { badges: nb });
+        setTimeout(() => showNotif('🎉 شارة جديدة: ' + nb[nb.length-1]), 1000);
+      }
+    } catch(e) {}
+  }
+
+  function showHeartEffect() {
+    const h = document.createElement('div');
+    h.textContent = '❤️';
+    h.style.cssText = `position:fixed;font-size:2rem;pointer-events:none;z-index:9999;animation:heartFly 1s ease forwards;left:${Math.random()*70+15}%;top:60%;`;
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1000);
+  }
+
+  async function updateVisitorCount() {
+    try {
+      const ref = doc(db,'stats','visitors');
+      await setDoc(ref, { count: increment(1) }, { merge: true });
+      onSnapshot(ref, snap => {
+        if (snap.exists()) document.getElementById('visitor-count').textContent = snap.data().count || 0;
+      });
+    } catch(e) {}
+  }
+
+  function timeAgo(date) {
+    if (!date) return '';
+    const d = date?.toDate ? date.toDate() : new Date(date);
+    const diff = Math.floor((Date.now() - d.getTime()) / 1000);
+    if (diff < 60) return 'الآن';
+    if (diff < 3600) return `منذ ${Math.floor(diff/60)} دقيقة`;
+    if (diff < 86400) return `منذ ${Math.floor(diff/3600)} ساعة`;
+    return `منذ ${Math.floor(diff/86400)} يوم`;
+  }
+
+  function renderCard(p, i) {
+    const liked = currentUser && p.likes?.includes(currentUser.uid);
+    const isOwner = currentUser && p.authorId === currentUser.uid;
+    const created = p.createdAt?.toDate ? p.createdAt.toDate() : new Date(p.createdAt || Date.now());
+    const canEdit = isOwner && ((Date.now() - created.getTime()) / 1000 / 60) < 10;
+    const moodEmoji = {'حزن':'😢','فرح':'😊','حنين':'🌙','غضب':'🔥','حب':'❤️','هدوء':'🕊️'}[p.mood] || '';
+    const av = `<img src="${avatarUrl(p.authorName||'؟')}" alt="${p.authorName}" onerror="this.style.display='none'">`;
+    return `<div class="poem-card" style="animation-delay:${i*0.06}s">
+      <div class="card-header">
+        <div class="avatar" onclick="showProfile('${p.authorId}')">${av}</div>
+        <div class="card-meta">
+          <div class="name" onclick="showProfile('${p.authorId}')">${p.authorName||'مجهول'} ${moodEmoji}</div>
+          <div class="time">${timeAgo(p.createdAt)}${p.editedAt?' · تم التعديل':''}</div>
+        </div>
+        <div style="display:flex;gap:0.3rem;margin-right:auto">
+          ${canEdit?`<button class="action-btn" onclick="editPoem('${p.id}')">✏️</button>`:''}
+          ${isOwner?`<button class="action-btn danger" onclick="deletePoem('${p.id}')">🗑</button>`:''}
+        </div>
+      </div>
+      <div class="poem-title">${p.title}</div>
+      <div class="poem-text">${p.text}</div>
+      <div class="poem-tags">${(p.tags||[]).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="card-actions">
+        <button class="action-btn${liked?' liked':''}" onclick="toggleLike('${p.id}')">
+          ${liked?'❤️':'🤍'} ${p.likes?.length||0} إعجاب
+        </button>
+        <button class="action-btn" onclick="toggleComments('${p.id}')">
+          💬 ${(p.comments||[]).length} تعليق
+        </button>
+        <button class="action-btn" onclick="sharePoem('${p.id}')">
+          ↗️ مشاركة
+        </button>
+      </div>
+      <div class="comments-section" id="comments-${p.id}">
+        ${(p.comments||[]).map(c=>`
+          <div class="comment">
+            <div class="sm-avatar"><img src="${avatarUrl(c.name||'؟')}" alt="${c.name}" onerror="this.style.display='none'"></div>
+            <div class="comment-body">
+              <div class="cname">${c.name||'مجهول'}</div>
+              <div class="ctext">${c.text}</div>
+            </div>
+          </div>`).join('')}
+        <div class="comment-input-row">
+          <input type="text" id="ci-${p.id}" placeholder="${currentUser?'اكتب تعليقاً...':'سجّل دخولك للتعليق'}" ${currentUser?'':'disabled'} onkeyup="if(event.key==='Enter')submitComment('${p.id}')">
+          <button onclick="submitComment('${p.id}')">إرسال</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderFeed(poems) {
+    const feed = document.getElementById('feed');
+    if (!feed) return;
+    feed.innerHTML = poems.length === 0
+      ? `<div style="text-align:center;color:var(--cream-dim);padding:3rem">لا توجد قصائد — كن الأول! 🌙</div>`
+      : poems.map((p,i) => renderCard(p,i)).join('');
+  }
+
+  function updateNavUI() {
+    document.getElementById('nav-auth').style.display = currentUser ? 'none' : 'flex';
+    document.getElementById('nav-user').style.display = currentUser ? 'flex' : 'none';
+    if (currentUser) {
+      document.getElementById('nav-username-display').textContent = currentUser.displayName || '';
+      const av = document.getElementById('nav-avatar-wrap');
+      av.innerHTML = `<img src="${avatarUrl(currentUser.displayName||'؟')}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="">`;
+    }
+  }
+
+  function updatePostBox() {
+    document.getElementById('post-locked').style.display = currentUser ? 'none' : 'block';
+    document.getElementById('post-form').style.display = currentUser ? 'block' : 'none';
+  }
+
+  window.filterMood = function(mood, btn) {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderFeed(mood === 'all' ? allPoems : allPoems.filter(p => p.mood === mood));
+  }
+
+  window.searchPoems = function() {
+    const q = document.getElementById('search-input').value.trim().toLowerCase();
+    if (!q) { renderFeed(allPoems); return; }
+    const filtered = allPoems.filter(p =>
+      p.title?.toLowerCase().includes(q) ||
+      p.text?.toLowerCase().includes(q) ||
+      p.authorName?.toLowerCase().includes(q)
+    );
+    renderFeed(filtered);
+    showNotif(`${filtered.length} نتيجة ✦`);
+  }
+
+  window.toggleTheme = function() {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('theme','light-mode' in document.body.classList ? 'light' : 'dark');
+    document.getElementById('theme-btn').textContent = isLight ? '🌙' : '☀️';
+  }
+
+  const q = query(collection(db,'poems'), orderBy('createdAt','desc'));
+  onSnapshot(q, snapshot => {
+    allPoems = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+    if (currentView === 'feed') renderFeed(allPoems);
+    else if (currentView === 'profile' && viewingUID) showProfile(viewingUID);
+    document.getElementById('total-poems').textContent = allPoems.length;
+    document.getElementById('total-likes').textContent = allPoems.reduce((s,p) => s+(p.likes?.length||0), 0);
+  });
+
+  window.addEventListener('load', () => {
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+      document.getElementById('theme-btn').textContent = '🌙';
+    }
+    updateVisitorCount();
+  });
+</script>
+
+<script>
+function openModal(id) {
+  if (id === 'login' || id === 'register') {
+    document.getElementById('auth-modal').classList.add('open');
+    switchTab(id);
+  } else {
+    document.getElementById(id).classList.add('open');
+  }
+}
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function switchTab(tab) {
+  document.getElementById('login-form').style.display = tab==='login'?'block':'none';
+  document.getElementById('register-form').style.display = tab==='register'?'block':'none';
+  document.getElementById('tab-login').classList.toggle('active',tab==='login');
+  document.getElementById('tab-register').classList.toggle('active',tab==='register');
+}
+function showError(id,msg) { const el=document.getElementById(id); el.textContent=msg; el.classList.add('show'); }
+let notifTimer;
+function showNotif(msg) {
+  const el=document.getElementById('notif');
+  el.textContent=msg; el.classList.add('show');
+  clearTimeout(notifTimer);
+  notifTimer=setTimeout(()=>el.classList.remove('show'),3000);
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', function(e){ if(e.target===this) this.classList.remove('open'); });
+});
+</script>
+</body>
+</html>
