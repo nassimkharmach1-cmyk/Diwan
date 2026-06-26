@@ -4,6 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ديوان — منصة الشعر العربي</title>
+
+<!-- SEO -->
+<meta name="description" content="ديوان — منصة الشعر العربي الأولى. شارك قصائدك، تفاعل مع الشعراء، واكتشف أجمل الأشعار العربية.">
+<meta name="keywords" content="ديوان, شعر عربي, قصائد, شعر, شعراء, منصة شعر, شعر عربي اونلاين">
+<meta name="author" content="ديوان">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Arabic">
+
+<!-- Open Graph للمشاركة على السوشيال ميديا -->
+<meta property="og:title" content="ديوان — منصة الشعر العربي">
+<meta property="og:description" content="شارك قصائدك وتفاعل مع الشعراء من كل مكان">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_AR">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ديوان — منصة الشعر العربي">
+<meta name="twitter:description" content="شارك قصائدك وتفاعل مع الشعراء من كل مكان">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://nassimkharmach1-cmyk.github.io/Diwan">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root { --gold:#c9a84c; --gold-light:#e8c97a; --gold-dim:#8a6f30; --dark:#0d0b07; --dark3:#1c1608; --dark4:#241d0a; --cream:#f5ead8; --cream-dim:#c8b896; }
@@ -232,6 +253,17 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('edit-profile-modal')">✕</button>
     <h2>تعديل ملفك ✏️</h2>
+    <!-- معاينة الصورة -->
+    <div style="text-align:center;margin-bottom:1rem">
+      <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;border:2px solid var(--gold);margin:0 auto 0.7rem;cursor:pointer" onclick="document.getElementById('edit-profile-photo-input').click()">
+        <img id="edit-profile-photo-preview" src="" alt="صورتك" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <label for="edit-profile-photo-input" style="cursor:pointer;color:var(--gold-dim);font-size:0.88rem;border:1px solid rgba(201,168,76,0.3);padding:0.3rem 0.9rem;border-radius:20px">
+        📷 تغيير الصورة
+      </label>
+      <input type="file" id="edit-profile-photo-input" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+      <div style="font-size:0.75rem;color:var(--cream-dim);margin-top:0.4rem;opacity:0.6">الحد الأقصى 2MB</div>
+    </div>
     <input type="text" id="edit-profile-name" placeholder="الاسم الكامل">
     <textarea id="edit-bio" placeholder="نبذة عنك..."></textarea>
     <button class="btn-gold" id="save-profile-btn" onclick="saveProfile()" style="width:100%;padding:0.7rem;">حفظ ✦</button>
@@ -244,6 +276,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, arrayUnion, arrayRemove, deleteDoc, orderBy, query, getDoc, setDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 
   const DEVELOPER_EMAIL = 'nassimkharmach1@gmail.com';
   const firebaseConfig = {
@@ -264,8 +297,23 @@
   let currentView = 'feed';
   let viewingUID = null;
 
+  // cache للصور الشخصية
+  const photoCache = {};
+
   function avatarUrl(name) {
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=8a6f30&color=f5ead8&size=80&bold=true&font-size=0.4`;
+  }
+
+  async function getUserPhoto(uid) {
+    if (photoCache[uid]) return photoCache[uid];
+    try {
+      const d = await getDoc(doc(db,'users',uid));
+      if (d.exists() && d.data().photoURL) {
+        photoCache[uid] = d.data().photoURL;
+        return d.data().photoURL;
+      }
+    } catch(e) {}
+    return null;
   }
 
   // ===== AUTH =====
@@ -339,13 +387,14 @@
     const userPoems = allPoems.filter(p => p.authorId === uid);
     const isMe = currentUser && currentUser.uid === uid;
     const totalLikes = userPoems.reduce((s,p) => s+(p.likes?.length||0), 0);
+    const profilePhoto = u.photoURL || avatarUrl(u.name||'؟');
 
     document.getElementById('profile-section').innerHTML = `
       <div class="profile-page">
         <button class="back-btn" onclick="showMain()">← رجوع للرئيسية</button>
         <div class="profile-header">
           <div class="profile-avatar-wrap">
-            <img src="${avatarUrl(u.name||'؟')}" alt="${u.name}">
+            <img src="${profilePhoto}" alt="${u.name}">
           </div>
           <div class="profile-name">
             ${u.name || 'مجهول'}
@@ -387,8 +436,22 @@
       const u = d.exists() ? d.data() : {};
       document.getElementById('edit-profile-name').value = u.name || currentUser.displayName || '';
       document.getElementById('edit-bio').value = u.bio || '';
+      const currentPhoto = u.photoURL || avatarUrl(u.name||'؟');
+      document.getElementById('edit-profile-photo-preview').src = currentPhoto;
       openModal('edit-profile-modal');
     });
+  }
+
+  window.previewPhoto = function(input) {
+    const file = input.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) { showNotif('الصورة كبيرة جداً — الحد الأقصى 2MB'); input.value=''; return; }
+    if (!file.type.startsWith('image/')) { showNotif('يرجى اختيار صورة صحيحة'); input.value=''; return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      document.getElementById('edit-profile-photo-preview').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   window.saveProfile = async function() {
@@ -400,8 +463,29 @@
     btn.textContent = 'جارٍ الحفظ...';
     btn.disabled = true;
     try {
-      await updateDoc(doc(db,'users',currentUser.uid), { name, bio });
-      await updateProfile(currentUser, { displayName: name });
+      let photoURL = null;
+      const fileInput = document.getElementById('edit-profile-photo-input');
+      const file = fileInput && fileInput.files[0];
+      if (file) {
+        showNotif('جارٍ رفع الصورة... 🌙');
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'diwan_avatars');
+        formData.append('public_id', `avatars/${currentUser.uid}`);
+        formData.append('overwrite', 'true');
+        const res = await fetch('https://api.cloudinary.com/v1_1/dieysibel/image/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        if (!data.secure_url) throw new Error('فشل رفع الصورة');
+        photoURL = data.secure_url;
+        photoCache[currentUser.uid] = photoURL;
+      }
+      const updateData = { name, bio };
+      if (photoURL) updateData.photoURL = photoURL;
+      await updateDoc(doc(db,'users',currentUser.uid), updateData);
+      await updateProfile(currentUser, { displayName: name, ...(photoURL && { photoURL }) });
       closeModal('edit-profile-modal');
       showNotif('تم تحديث ملفك ✦');
       if (currentView === 'profile') showProfile(currentUser.uid);
@@ -567,7 +651,7 @@
     const created = p.createdAt?.toDate ? p.createdAt.toDate() : new Date(p.createdAt || Date.now());
     const canEdit = isOwner && ((Date.now() - created.getTime()) / 1000 / 60) < 10;
     const moodEmoji = {'حزن':'😢','فرح':'😊','حنين':'🌙','غضب':'🔥','حب':'❤️','هدوء':'🕊️'}[p.mood] || '';
-    const av = `<img src="${avatarUrl(p.authorName||'؟')}" alt="${p.authorName}" onerror="this.style.display='none'">`;
+    const av = `<img src="${photoCache[p.authorId] || avatarUrl(p.authorName||'؟')}" alt="${p.authorName}" onerror="this.src='${avatarUrl(p.authorName||'؟')}'">`;
     return `<div class="poem-card" style="animation-delay:${i*0.06}s">
       <div class="card-header">
         <div class="avatar" onclick="showProfile('${p.authorId}')">${av}</div>
@@ -625,7 +709,12 @@
     if (currentUser) {
       document.getElementById('nav-username-display').textContent = currentUser.displayName || '';
       const av = document.getElementById('nav-avatar-wrap');
-      av.innerHTML = `<img src="${avatarUrl(currentUser.displayName||'؟')}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="">`;
+      // جلب الصورة من Firestore
+      getDoc(doc(db,'users',currentUser.uid)).then(d => {
+        const photoURL = d.exists() && d.data().photoURL ? d.data().photoURL : avatarUrl(currentUser.displayName||'؟');
+        av.innerHTML = `<img src="${photoURL}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" alt="">`;
+        if (d.exists() && d.data().photoURL) photoCache[currentUser.uid] = d.data().photoURL;
+      });
     }
   }
 
